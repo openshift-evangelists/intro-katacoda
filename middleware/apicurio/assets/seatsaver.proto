@@ -1,0 +1,100 @@
+syntax = "proto3";
+
+package seatsaver;
+
+option objc_class_prefix = "SEATSAVER";
+
+/* Describes a customer associated with a seat. */
+message Customer {
+    string firstName = 1;
+    string lastName = 2;
+    string email = 3;
+    string created = 4;
+    string message = 5;
+}
+/* Describes a possible status of a seat */
+enum Status {
+    RELEASING = 0;
+    OPEN = 1;
+    RESERVING = 2;
+    RESERVED = 3;
+    SELLING = 4;
+    SOLD = 5;
+}
+
+/* Describes a seat */
+message Seat {
+    string id = 1;
+    string number = 2;
+    string section = 3;
+    Status status = 4;
+    string changed = 5;
+    string created = 6;
+    Customer customer = 7;
+    string message = 8;
+}
+
+/* Describes a venue that has seats */
+message Venue {
+    string id = 1;
+    string name = 2;
+    string address = 3;
+    string city = 4;
+    string state_province = 5;
+    string postal_code = 6;
+    string country = 7;
+    string changed = 8;
+    string created = 9;
+    repeated Seat seats = 10;
+    string message = 11;
+}
+
+message Authentication {
+    string authenticationId = 1;
+    string message = 2;
+}
+message VenueRequest {
+    string venueId = 1;
+    string authenticationId = 2;
+}
+
+message SeatRequest {
+    string venueId = 1;
+    string seatId = 2;
+    string authenticationId = 3;
+}
+
+message SeatStatusRequest {
+    string venueId = 1;
+    Seat seat = 2;
+    string authenticationId = 3;
+}
+
+message PingRequest {
+    string authenticationId = 1;
+    int32 streamItemCount = 2;
+}
+
+message PingResponse {
+    string runtimeInfo = 1;
+    string message = 2;
+}
+
+message VenuesResponse {
+    repeated Venue venues = 1;
+    string message = 2;
+}
+
+service SeatSaverService {
+    rpc GetVenues(Authentication) returns (stream Venue) {}
+    rpc GetVenue(VenueRequest) returns (Venue) {}
+    rpc GetOpenSeats(VenueRequest) returns (stream Seat) {}
+    rpc GetSoldSeats(VenueRequest) returns (stream Seat) {}
+    rpc GetReservedSeats(VenueRequest) returns (stream Seat) {}
+    rpc GetSeats(VenueRequest) returns (stream Seat) {}
+    rpc ReserveSeat(SeatStatusRequest) returns (Seat) {}
+    rpc ReleaseSeat(SeatStatusRequest) returns (Seat) {}
+    rpc BuySeat(SeatStatusRequest) returns (Seat) {}
+    rpc Ping(PingRequest) returns (PingResponse) {}
+    rpc PingStream(PingRequest) returns (stream PingResponse) {}
+}

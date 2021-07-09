@@ -1,0 +1,48 @@
+{
+  "title": "Working with a Schema Registry Using Apicurio",
+  "description": "Learn how to setup and use a schema registry to serve as a single source of truth for data structures",
+  "difficulty": "Basic Understanding of Data Schemas",
+  "time": "15 minutes",
+  "details": {
+    "steps": [{
+        "title": "Installing Apicurio under Docker",
+        "text": "step01.md"
+      },
+      {
+        "title": "Adding schemas to the registry",
+        "text": "step02.md"
+      },
+      {
+        "title": "Using the Apicurio web interface",
+        "text": "step03.md"
+      },
+      {
+        "title": "Working with the Apicurio API at the command line",
+        "text": "step04.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md",
+      "credits": ""
+    },
+    "finish": {
+      "text": "finish.md"
+    },
+     "assets": {
+      "host01": [
+          {"file": "airport-codes.json", "target": "/root/"},
+          {"file": "simple.proto", "target": "/root/"},
+          {"file": "simple.json", "target": "/root/"},
+          {"file": "seatsaver.proto", "target": "/root/"}
+      ]
+    }
+  },
+  "environment": {
+  	"showide": true,
+    "uilayout": "terminal",
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal for Working with Apicurio\u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "ubuntu"
+  }
+}

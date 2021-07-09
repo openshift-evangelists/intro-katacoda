@@ -1,0 +1,191 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "A super great RESTful API that allows developers to lookup the codes for all the major international airports. Also, the API allows adminstrators to add a new airport code as needed.",
+    "version": "0.0.9",
+    "title": "Airport Codes Lookup API",
+    "contact": {
+      "email": "reselbob@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "virtserver.swaggerhub.com",
+  "basePath": "/breselman/GoodAirportCodes/0.0.9",
+  "tags": [
+    {
+      "name": "admins",
+      "description": "Secured Admin-only calls"
+    },
+    {
+      "name": "developers",
+      "description": "Operations available to regular developers"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/airportCodes/{code}": {
+      "get": {
+        "tags": [
+          "developers"
+        ],
+        "summary": "gets a particular airport code",
+        "description": "Gets airport information that corresponds to the submitted aiport code.\n",
+        "operationId": "getAirportCode",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The aiport code to lookup",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the result that corresponds to the submitted airport code",
+            "schema": {
+              "$ref": "#/definitions/AirportCode"
+            }
+          },
+          "400": {
+            "description": "bad input parameter",
+            "schema": {
+              "$ref": "#/definitions/AirportCodeInputError"
+            }
+          }
+        }
+      }
+    },
+    "/airportCodes": {
+      "get": {
+        "tags": [
+          "developers"
+        ],
+        "summary": "gets all airport codes that corresponds to the search term",
+        "description": "Gets airport information that corresponds to the submitted search term. If no search term is provides, all codes are returned\n",
+        "operationId": "searchAirportCodes",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "searchterm",
+            "in": "query",
+            "description": "search term to process",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the result that corresponds to the submitted search term",
+            "schema": {
+              "$ref": "#/definitions/AirportCodes"
+            }
+          },
+          "400": {
+            "description": "bad request",
+            "schema": {
+              "$ref": "#/definitions/AirportCodeInputError"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "adds a new Airport Code to the resource",
+        "description": "Adds an new aiport code to the resource\n",
+        "operationId": "setAirportCode",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The airport code to add",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AirportCode"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the newly created airport code",
+            "schema": {
+              "$ref": "#/definitions/AirportCode"
+            }
+          },
+          "400": {
+            "description": "bad input parameter",
+            "schema": {
+              "$ref": "#/definitions/AirportCodeInputError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AirportCodeInputError": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Bad input data"
+        }
+      }
+    },
+    "AirportCode": {
+      "type": "object",
+      "required": [
+        "airport",
+        "code"
+      ],
+      "properties": {
+        "airport": {
+          "type": "string",
+          "example": "Mock of Los Angeles International Aiport"
+        },
+        "code": {
+          "type": "string",
+          "example": "LAX"
+        }
+      }
+    },
+    "AirportCodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AirportCode"
+      },
+      "example": [
+        {
+          "code": "LAX",
+          "description": "Los Angeles International Airport"
+        },
+        {
+          "code": "LGA",
+          "description": "LaGuardia Airport"
+        },
+        {
+          "code": "EWR",
+          "description": "Newark International Airport"
+        }
+      ]
+    }
+  }
+}
