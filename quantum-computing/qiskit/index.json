@@ -1,0 +1,63 @@
+{
+    "icon": "fa-openshift",
+    "title": "Quantum Computing on OpenShift using Qiskit(OpenShift 4.5)",
+    "description": "Implement quantum circuits using Qiskit SDK on OpenShift",
+    "pathwayTitle": "OpenShift",
+    "difficulty": "intermediate",
+    "time": "60 minutes",
+    "backend": {
+        "imageid": "openshift-4-5"
+    },
+    "environment": {
+        "uilayout": "editor-terminal",
+        "uisettings": "javascript",
+        "uieditorpath": "/root/openshift-quantum-operators/operators-examples/openshift-qiskit-operator/",
+        "showdashboard": true,
+        "hideintro": false,
+        "dashboards": [
+            {
+                "name": "Console",
+                "href": "https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com"
+            }
+        ]
+    },
+    "details": {
+        "steps": [
+            {
+                "title": "Installation",
+                "text": "01-installation.md"
+            },
+            {
+                "title": "Step 2 - Example workload",
+                "text": "02-example-workload.md"
+            },
+            {
+                "title": "Step 4 - Introduction to OpenShift IBM Quantum Operator",
+                "text": "04-intro-ocp-ibm-quantum-operator.md"
+            },
+            {
+                "title": "Step 5 - Installing OpenShift IBM Quantum Operator",
+                "text": "05-installation-ocp-ibm-quantum-op.md"
+            },
+            {
+                "title": "Step 6 - Testing IBM Quantum Operator",
+                "text": "06-exploring-the-deploy.md"
+            }
+        ],
+        "intro": {
+            "code": "set-env.sh",
+            "text": "intro.md"
+        },
+        "finish": {
+            "text": "finish.md"
+        },
+        "assets": {
+            "client": [
+                {
+                    "file": "configure-scenario.sh",
+                    "target": "/var/tmp/"
+                }
+            ]
+        }
+    }
+}

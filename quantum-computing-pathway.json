@@ -1,0 +1,11 @@
+{
+  "title": "Quantum computing on OpenShift",
+  "icon": "fa-openshift",
+  "courses": [
+    {
+      "external_link": "https://learn.openshift.com/quantum-computing/qiskit/",
+      "course_id": "qiskit",
+      "title": "Quantum Computing on OpenShift using Qiskit"
+    }
+  ]
+}
